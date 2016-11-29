@@ -70,10 +70,29 @@
       </dict>
       <dict>
         <key>begin</key>
-        <string>^\s*\w+\(</string>
+        <string>^\s*(\w+\()</string>
         <key>end</key>
         <string>(\))</string>
-        <key>name</key>
+        <key>patterns</key>
+        <array>
+          <dict>
+            <key>begin</key>
+            <string>\(</string>
+            <key>end</key>
+            <string>\)</string>
+            <key>name</key>
+            <string>comment.line.disabled.mvw</string>
+          </dict>
+        </array>
+        <key>captures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>comment.line.disabled.mvw</string>
+          </dict>
+        </dict>
+        <key>contentName</key>
         <string>comment.line.disabled.mvw</string>
       </dict>
     </array>
