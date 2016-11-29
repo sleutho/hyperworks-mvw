@@ -11,10 +11,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/sleutho/hyperworks/"
+		"url": "https://github.com/sleutho/hyperworks-mvw/"
 	},
 	"bugs": {
-		"url": "https://github.com/sleutho/hyperworks/issues"
+		"url": "https://github.com/sleutho/hyperworks-mvw/issues"
 	},
     "engines": {
         "vscode": "^1.5.0"
