@@ -1,7 +1,7 @@
 {
-    "name": "templex",
-    "displayName": "Templex",
-    "description": "Templex Language Support",
+    "name": "hyperworks",
+    "displayName": "HyperWorks",
+    "description": "HyperWorks Session Files",
     "version": "0.1.0",
     "publisher": "sleutho",
 	"author": {
@@ -26,7 +26,6 @@
     ],
 	"keywords": [
 		"Languages",
-		"Templex",
 		"HyperWorks",
         "Altair",
         "Session"
