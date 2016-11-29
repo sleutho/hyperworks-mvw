@@ -4,74 +4,29 @@
   <dict>
     <key>fileTypes</key>
     <array>
-      <string>tpl</string>
+      <string>mvw</string>
     </array>
     <key>keyEquivalent</key>
     <string>^~T</string>
     <key>name</key>
-    <string>Templex</string>
+    <string>HyperWorks-MVW</string>
     <key>patterns</key>
     <array>
       <dict>
         <key>include</key>
-        <string>#function</string>
+        <string>#keyword</string>
       </dict>
       <dict>
-        <key>begin</key>
-        <string>({)</string>
-        <key>end</key>
-        <string>(})</string>
-        <key>patterns</key>
-        <array>
-          <dict>
-            <key>include</key>
-            <string>#templex_off</string>
-          </dict>
-          <dict>
-            <key>include</key>
-            <string>$self</string>
-          </dict>
-          <dict>
-            <key>include</key>
-            <string>#keyword</string>
-          </dict>
-          <dict>
-            <key>include</key>
-            <string>#comment</string>
-          </dict>
-          <dict>
-            <key>include</key>
-            <string>#format</string>
-          </dict>
-          <dict>
-            <key>include</key>
-            <string>#constant</string>
-          </dict>
-          <dict>
-            <key>include</key>
-            <string>#operator</string>
-          </dict>
-          <dict>
-            <key>include</key>
-            <string>#string</string>
-          </dict>
-          <dict>
-            <key>include</key>
-            <string>#function</string>
-          </dict>
-          <dict>
-            <key>include</key>
-            <string>#build-in-function</string>
-          </dict>
-        </array>
-        <key>captures</key>
-        <dict>
-          <key>1</key>
-          <dict>
-            <key>name</key>
-            <string>variable.language.tcl</string>
-          </dict>
-        </dict>
+        <key>include</key>
+        <string>#comment</string>
+      </dict>
+      <dict>
+        <key>include</key>
+        <string>#disabled-statement</string>
+      </dict>
+      <dict>
+        <key>include</key>
+        <string>#string</string>
       </dict>
     </array>
     <key>repository</key>
@@ -79,64 +34,44 @@
       <key>keyword</key>
       <dict>
         <key>match</key>
-        <string>\b(while|for|foreach|if|endif|endloop|elseif|else|return)\b</string>
-        <key>name</key>
-        <string>keyword.control.tpl</string>
-      </dict>
-      <key>function</key>
-      <dict>
-        <key>match</key>
-        <string>\b(function)\b</string>
-        <key>name</key>
-        <string>entity.name.type.tpl</string>
-      </dict>
-      <key>build-in-function</key>
-      <dict>
-        <key>match</key>
-        <string>\b(abstorelative|addfilepath|append|attach_note_at|attach_note_to|close|curval|define|dictionary|display_as_output|echo|else|elseif|enddefine|endif|endloop|eval|exit|fileopen|filereadstring|for|foreach|format|getcwd|getvalueatindex|if|include|interpret_set|open|page|parameter|path|read|readfill|registerexternalfunction|registerexternalreader|relativetoabs|removefilepath|report_animate|safe_quotes_off|safe_quotes_on|set|sync2|sysarch|system|table|templex_off|templex_on|undef|while|abs|absarea|abstorerelative|acos|akima|akimaderivative|array|asc|asin|atan|atan2|atoi|avgdev|batch|batchpolyfit|bins|blackman|blockfftimag|blockfftmag|blockfftphase|blockfftreal|blockfrfimag|blockfrfmag|blockfrfphase|blockfrfreal|cat|cdf|centroid|chr|cint|coherence|convert|correl|cos|cosh|cr|curvelabel|curvelength|curveproduct|curvesum|curvesync|curvex|curvey|date|dba|dbb|dbc|dbu|dcorr|delta|derivative|determinant|deviation_metric|dfreq|dftimag|dftmag|dftphase|dftreal|dtor|eigvalimag|eigvalreal|eigvecimag|eigvecreal|eval|exp|expfit|extern|fcorr|fftimag|fftmag|fftphase|fftreal|fileclose|filefindstring|fileinfo|fileopen|fill|fold|freeze|freq|frfimag|frfmag|frfphase|frfreal|getenv|getval2|getvalue|hamming|hanning|hilbert|idft|ifft|iffunc|indexofmax|indexofmin|int|integral|intercepts|intersect|invcdf|inverse|irfilter|itoa|kaiser|lininterp|logint|log,ln|log10|mag|max|maxindex|mean|median|mid|min|mstep|nonlinfit|nr|numcurves|numpts|OLC|parzen|pdf|peaks|polyfit|polyrootsimag|polyrootsreal|polyval|projectcurvetosurface|psd|psd5|rand|read|readsim|readsubcase|relativetoabs|reldisp|remove_succ_dup_indx|replace|resampresp|resamprevs|resamptime|resvector|rms|rtod|saefilter|sgcm|signedarea|sin|sinh|size|skewness|smean|sort|spline|sqrt|stfreq|stft|storder|strchr|stringarray|strlen|strrchr|strsegrevs|strsegrps|strstr|stsegrps|stsegtime|subrange|sum|suppress|sysid|system|tan|tanh|tcleval|tclevalfile|tclgetvar|thaw|time|timer|tolower|toupper|typeof|variance|vtdft|vtfreq|vtorder|vtsegrps|vtsegtime|welch|zerocrossings|barchart|besselfilteranalog|besselfilterdigital|butterworth|clip|clip_continuous|clip_cumulative|duration|fir100|fuse|hic|hicd|histogram|iso6487|levelcrossing|nij|rainflow|rangepair|saefilt95|th_bandpass_butter|th_butter|th_cfc|th_fir100|th_four|th_sae|th_tche|timeatlevel)(?!,|\))\b</string>
-        <key>name</key>
-        <string>entity.name.function.tpl</string>
-      </dict>
-      <key>comment</key>
-      <dict>
-        <key>match</key>
-        <string>(?&lt;!")(')([^}\n]*)</string>
+        <string>(\*)(\w+)(\().*(\))</string>
         <key>captures</key>
         <dict>
           <key>1</key>
           <dict>
             <key>name</key>
-            <string>comment.line.apostrophe.tpl</string>
+            <string>entity.name.function.mvw</string>
           </dict>
           <key>2</key>
           <dict>
             <key>name</key>
-            <string>comment.line.tpl</string>
+            <string>keyword.control.mvw</string>
+          </dict>
+          <key>3</key>
+          <dict>
+            <key>name</key>
+            <string>variable.language.mvw</string>
+          </dict>
+          <key>4</key>
+          <dict>
+            <key>name</key>
+            <string>variable.language.mvw</string>
           </dict>
         </dict>
-        <key>contentName</key>
-        <string>comment.line.apostrophe.tpl</string>
       </dict>
-      <key>constant</key>
+      <key>comment</key>
       <dict>
         <key>match</key>
-        <string>\b([0-9]+|[0-9]*\.[0-9]+|[0-9]*\.?[0-9]+[eE][-+]?[0-9]*)\b</string>
+        <string>(\/\/.*)</string>
         <key>name</key>
-        <string>constant.numeric.tpl</string>
+        <string>comment.line.mvw</string>
       </dict>
-      <key>format</key>
+      <key>disabled-statement</key>
       <dict>
         <key>match</key>
-        <string>%[\+-]?[0-9]+(\.[0-9]+)?[sgfeE]</string>
+        <string>^\s*\w+\(.*\)</string>
         <key>name</key>
-        <string>constant.numeric.other.tpl</string>
-      </dict>
-      <key>operator</key>
-      <dict>
-        <key>match</key>
-        <string>([\+\-\*/\=\^%\!<>\:])</string>
-        <key>name</key>
-        <string>keyword.operator.tpl</string>
+        <string>comment.line.disabled.mvw</string>
       </dict>
       <key>string</key>
       <dict>
@@ -145,47 +80,12 @@
         <key>end</key>
         <string>"</string>
         <key>name</key>
-        <string>string.quoted.double.tpl</string>
-      </dict>
-      <key>templex_off</key>
-      <dict>
-        <key>begin</key>
-        <string>\b(templex_off)\s?\b(})?</string>
-        <key>beginCaptures</key>
-        <dict>
-          <key>1</key>
-          <dict>
-            <key>name</key>
-            <string>entity.name.function.tpl</string>
-          </dict>
-          <key>2</key>
-          <dict>
-            <key>name</key>
-            <string>variable.language.tcl</string>
-          </dict>
-        </dict>
-        <key>end</key>
-        <string>({)?\b\s?(templex_on)\b</string>
-        <key>endCaptures</key>
-        <dict>
-          <key>2</key>
-          <dict>
-            <key>name</key>
-            <string>entity.name.function.tpl</string>
-          </dict>
-          <key>1</key>
-          <dict>
-            <key>name</key>
-            <string>variable.language.tcl</string>
-          </dict>
-        </dict>
-        <key>contentName</key>
-        <string>comment.block.preprocessor.tpl</string>
+        <string>string.quoted.double.mvw</string>
       </dict>
     </dict>
     <key>scopeName</key>
-    <string>source.tpl</string>
+    <string>source.mvw</string>
     <key>uuid</key>
-    <string>F01F22AC-7CBB-11D9-9B10-000A95E13C98</string>
+    <string>F01F22AC-6CBB-11D9-9B10-000A95E13C99</string>
   </dict>
 </plist>
