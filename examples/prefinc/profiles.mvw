@@ -1,0 +1,6 @@
+*RegisterPreferenceFile("Vehicle Safety Tools","utility/VehicleSafetyTools/mv_hv_hg/vst.mvw","")
+*RegisterPreferenceFile("NVH Utilities","utility/nvh/preferences/nvh.mvw","")
+*RegisterPreferenceFile("HyperForm Utilities","utility/hyperform/preferences/hyperform.mvw","")
+*RegisterPreferenceFile("MBD-Vehicle Dynamics Tools","utility/mbd/preferences/mvdt.mvw","")
+*RegisterPreferenceFile("Model Identification Tool","utility/ModelIdentificationTool/ModelIdentificationTool.mvw","")
+*RegisterPreferenceFile("Aerospace Tools","hm/scripts/EngineeringSolutions/aerospace/aerospace.mvw","")

@@ -1,0 +1,27 @@
+// Preferences for 3D plotting client for Altair HyperWorks
+// This is a installation file and may be overwritten during a 
+// service pack installation. Do not edit. 
+// WARNING : This file cannot be used as a preference file independently.
+//           This file needs to be included by a main preference file.
+
+{import_templates_dir = getenv("TEMPLATES_DIR") + "/import/"}
+{export_templates_dir = getenv("TEMPLATES_DIR") + "/export/"}
+{external_readers_dir = getenv("EXTERNALREADERS_DIR")}
+{external_writers_dir = getenv("EXTERNALWRITERS_DIR")}
+{external_funcs_dir   = getenv("EXTERNALFUNCS_DIR")}
+{utility_scripts_dir  = getenv("ALTAIR_HOME") + "/utility/scripts/"}
+{context_menu_script  = utility_scripts_dir + "plotting/general_context_menu_curve.tcl"}
+{vst_script           = getenv("ALTAIR_HOME") + "/utility/VehicleSafetyTools/mv_hv_hg/include/context_menu_curve.tcl"}
+
+*BeginPlot3DDefaults()
+
+     {include getenv("ALTAIR_HOME") + "/hw/prefinc/preferences_common_plot.mvw"}
+     
+     *SetAxisLabelFont("Arial", 0, 0, 12)
+     *SetAxisTicFont("Arial", 0, 0, 10)
+     *SetBackgroundColor(98)
+     *SetFrameColor(66)
+     *SetGridLineColor(9)
+     *SetZeroLineColor(0)
+
+*EndPlot3DDefaults()

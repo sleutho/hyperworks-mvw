@@ -1,0 +1,168 @@
+// Preferences for animation client for Altair HyperWorks
+// This is a installation file and may be overwritten during a 
+// service pack installation. Do not edit. 
+// WARNING : This file cannot be used as a preference file independently.
+//           This file needs to be included by a main preference file.
+
+{rmath_template_dir = getenv("ALTAIR_HOME") + "/io/result_readers/rmxml"}
+
+*BeginGraphicDefaults()
+
+   // If the number of coils in a helix exceeds this count, it will 
+   // create a deformable cylinder (0 = disable, 20 = default).
+   SpringAsCylinderCoilCount(15)
+
+   SetMemoryWaterMark(100, 80)
+
+   *SetPartColorList(18,21,58,62,49,9,29,37,25,41)
+
+   //<min value>, <max value>, <Fixed or Scientific>, <num digits>
+   *DefineNumericFormat(0.0, 1.0e-3, "Scientific", 5)
+   *DefineNumericFormat(0.0, 1, "Fixed", 5)
+   *DefineNumericFormat(0.0, 10, "Fixed", 4)
+   *DefineNumericFormat(0.0, 100, "Fixed", 3)
+   *DefineNumericFormat(0.0, 1000, "Fixed", 2)
+   *DefineNumericFormat(0.0, 10000, "Fixed", 1)
+   *DefineNumericFormat(0.0, 1.0e6, "Scientific", 5)
+   *DefineNumericFormat(0.0, FLT_MAX, "Scientific", 4)
+           
+   *BeginReaderDefaults()
+      // To control which readers are loaded see the preference_tools.mvw
+      // DISABLED, IMMEDIATE, LAZY
+      ResultCacheMemoryConfig("CachePolicy","IMMEDIATE")  
+      ResultCacheMemoryConfig("CacheLimit", 512)           // 512 Mb
+      ResultCacheMemoryConfig("CacheDir", "")
+      ResultCacheMemoryConfig("QueueLimit", 16)            // 16 Mb
+      ResultCacheMemoryConfig("QueueTimeout", 10)          // 10 seconds
+   *EndReaderDefaults()
+           
+   // ----------------------------------------------------
+   // New preference setting for control HV panel defaults
+   // ----------------------------------------------------
+   // Contour panel.
+   //   S-Stress components IP" / "S-Global-Stress components 
+   //   or any valid result type name.
+   ContourResultType("Displacement") 
+   ContourCornerDataRequested("Off ")
+   ContourAveragingMethod("None") // "Simple" / "Advanced" / "Difference" / "Max of corner" / "Min of corner" / "Extreme of corner"
+   ContourFeatureAngleAverage(false,30,true)
+   ContourAverageAcrossParts("Off")
+   ContourShowMidsideNodeResults("Off")
+   DefaultPostContourLegendFile("c:/tmp/clegend.tcl")
+
+   // Followed by a float value. Any -ve float value would disable the variation 
+   ContourAverageVariation(".10") 
+   ContourMultiplier("1.0")
+
+   // Controls the min/max entity pool and id display.
+   *DefaultLegendEntityVisibility("Show")
+   
+   // Iso panel
+   IsoShowMidsideNodeResults("Off")
+      
+   //Tensor panel
+   TensorShowMidsideNodeResults("Off")
+            
+   //Deformed panel
+   DeformedScaleFactor("1") // "X" / "Y" / "Z" values.
+   DeformedScaleFactor(10, 20, 30) // "X" / "Y" / "Z" values.
+   InterpolationScaleMode("Model Percent") // "Model Percent" or "Model Units" or "Scale Factor"
+   InterpolationScaleFactor(1,1,1)
+            
+   //Measure panel 
+   MeasureType("Distance Between")
+   MeasureOptions("Magnitude", "ID", "System", "Transparency", "Auto-hide", "Prefix") // Only options specified are set. 
+
+   // Measure font and color
+   MeasureFont("Times New Roman",0,1,12)  // Family, bold, italic, size
+   MeasureColor("White")
+   
+
+   //Notes Panel 
+   NoteFont("Times New Roman",0,1,12)  // Family, bold, italic, size
+   NoteForeGroundColor("White")
+   NoteBackGroundColor("SteelBlue4")
+   NoteAttachment("Window")
+   NoteDescription("Note 2")
+   NoteTransparency("On")
+   NoteAnchorToScreen("Off")
+   NoteTextAlignment("right")
+   NoteBorderThickness("1") // or any +ve value. 
+   NoteShape("Rectangle")
+
+   VectorShowPrefix("Off")
+   VectorTextColor("red")
+   VectorFont("Times New Roman",0,0,10) // Family, bold, italic, size
+   TensorShowPrefix("Off")
+   TensorTextColor("0 255 0")
+   TensorFont("Times New Roman",0,0,10) // Family, bold, italic, size
+   
+   // Possible values are top, bottom, left, right, front, back, iso
+   SetOrientation("left");
+
+  
+   //FLD Panel 
+   FLDDisplay("ZoneContour") // "DistanceContour" 
+   FLDFitCurveFLC("Off")
+   DefaultPostFLDZoneLegendFile("c:/tmp/fld.tcl")
+   
+   
+   // Section Panel
+   SectionCrossSectionOnly("Off") // "On" or "Off"
+   SectionReverseMode("On")       // "On" or "Off"
+   
+   // Tracking Panel
+   TrackingSetAlignWithGlobal("On") // "On" or "Off"
+   
+
+   // Directors Chair
+   IncrementBy("Frame")
+            
+   //Tools => Options 
+   ElementMarkEnabled("On")
+   DABEnabled("Off")
+   SetBackgroundColor(6,31) // Top and bottom background color
+   SetGradientType(0) // vertical gradient
+   
+   // Section grid line options   
+   SectionGridLineVisibility("On")
+   SectionGridTextVisibility("Off") 
+   
+   //Path to predefined plot styles
+   *DefaultPlotStyles({ getenv("ALTAIR_HOME") + "/hw/prefinc/post_styles.xml"})
+
+   //Others
+   ModelInfoVisibility("On")
+   *ModelInfoDefaults("{for (i = 0; i != numpts(window.modeltitlelist); ++i) }\n{window.modelidlist[i]}: {window.modeltitlelist[i]}\n{window.loadcaselist[i]} : {window.simulationsteplist[i]} : {window.framelist[i]}\n{endloop}") 
+   SetCustomStringSupport("MBD")
+   
+   // Arg1: Name of the plugin  //Arg2: Help string  // Arg3: Type of plugin (TCL, TEMPLEX) // Arg4: Path to the tcl file
+   // Arg5: Format of the datatype which will be created by the plugin (SCALAR,VECTOR,TENSOR) // Arg6: The entity to which the datatype will be bound
+   // Arg7: OnBegin tcl procedure // Arg8: OnRecord tcl procedure // Arg9: OnEnd tcl procedure
+   
+   // Please note that in order to use the result math plugins, you will have to use the "Advanced" result math template
+   RegisterResultMathPlugin(MaxComp, "Find max component of vector", TCL, { getenv("ALTAIR_HOME") + "/hw/tcl/post/ResultMathPlugin/Example.tcl"}, SCALAR, NODES, "OnBegin", "OnRecord", "OnEnd")    
+   RegisterResultMathPlugin(PartNames, "Output part names to file", TCL, { getenv("ALTAIR_HOME") + "/hw/tcl/post/ResultMathPlugin/Example.tcl"}, SCALAR, PARTS, "OnBegin", "OnPartRecord", "OnEnd")    
+   RegisterResultMathPlugin(HmathPlugin, "Brittle failure theory", HYPERMATH, { getenv("ALTAIR_HOME") + "/hw/tcl/post/ResultMathPlugin/HyperMath_Example.hml"}, SCALAR, ELEM, "", "HmlPlugin::Hml_BrittleMatFailureTheory", "")
+   RegisterResultMathPlugin(MaxCompUsingScriptView, "Find max component of vector", HWTCL, { getenv("ALTAIR_HOME") + "/hw/tcl/post/ResultMathPlugin/Example.tcl"}, SCALAR, NODES, "OnBegin", "OnRecord", "OnEnd")    
+   
+   
+   
+   *RegisterResultMathTemplate("Standard", {rmath_template_dir + "/standard.xml"})
+   *RegisterResultMathTemplate("Advanced", {rmath_template_dir + "/advanced.xml"})      
+   *RegisterResultMathTemplate("NVH", {rmath_template_dir + "/nvh.xml"})
+   *RegisterResultMathTemplate("Composite", {rmath_template_dir + "/composite.xml"})
+   *RegisterResultMathTemplate("Aerospace", {rmath_template_dir + "/aerospace.xml"})
+   *DefaultResultMathTemplate("Standard")
+   *ResultMathState("On")
+   
+   Stereo3DOptions("On",4, 15)
+   
+   *ExternalConverter({getenv("ALTAIR_HOME") + "/hw/examples/video/run_mencoder"})
+   *ConverterOutputSettings("", 1, 1) 	
+   *DisableInternalReaders("Off")
+   
+   *BrowserLoadcaseViewFilePath("dir+filename") //"filename", "dir+filename", "dir level 1" "dir level 2" "dir level 3"
+
+*EndGraphicDefaults()
+    

@@ -1,0 +1,9 @@
+
+// Preferences for the Altair HyperWorks Application Launch Utility
+// This is an installation file and may be overwritten during a 
+// service pack installation. Do not edit. 
+// WARNING : This file cannot be used as a preference file independently.
+//           This file needs to be included by a main preference file.
+
+*RegisterExternalSolver("OptiStruct",  {getenv("hwslv_script")})
+*RegisterExternalSolver("Radioss",  {getenv("hwslv_script")})

@@ -1,0 +1,98 @@
+// HWVERSION_13.0.0.107_Jun 27 2014_14:8:18
+    // Preferences for MBD client for Altair HyperWorks
+    // This is a installation file and may be overwritten during a 
+    // service pack installation. Do not edit. 
+    // WARNING : This file cannot be used as a preference file independently.
+    //           This file needs to be included by a main preference file.
+
+    *BeginModelDefaults()
+
+        *SetImplicitGraphicDefault("Implicit", true, false, 100)
+        
+
+        *BeginMdlDefaults()
+
+            *RegisterAssemblyWizardFile( { getenv("ALTAIR_HOME") + "/hw/mdl/mdllib/model_wizard.wzd" } )
+            *RegisterTaskWizardFile( { getenv("ALTAIR_HOME") + "/hw/mdl/mdllib/task_wizard.wzd" } )
+            *RegisterWizardLibDir( { getenv("ALTAIR_HOME") + "/hw/mdl/mdllib" } )
+            *RegisterMdlStdIncFile( { getenv("ALTAIR_HOME") + "/hw/mdl/mdllib/std_inc.mdl" } )
+
+            *TopologyLibrary(mbd_standard_ents, "MBD Standard Entities", 
+                def_mbd_standard_ents, { getenv("MDL_DEFINITIONS_DIR") + "/topology_library.mdf"})
+            *TopologyInterpreter(mbd_standard_topo, "MBD Standard Topology", 
+                def_mbd_standard_topology, { getenv("MDL_DEFINITIONS_DIR") + "/topology_interpreter.mdf"})
+            *DataInterpreter(mbd_standard_sets, "MBD Standard Sets", 
+                def_mbd_standard_sets, { getenv("MDL_DEFINITIONS_DIR") + "/data_interpreter.mdf"})
+            *TopologyWriter(mbd_standard_topo_writer, "Write MBD Standard Topology", 
+                def_mbd_std_topo_writer, { getenv("MDL_DEFINITIONS_DIR") + "/topology_writer.mdf"})
+            *TopologyLightWriter(mbd_standard_topo_light_writer, "Write MBD Standard Topology Light", 
+                def_mbd_std_topo_light_writer, { getenv("MDL_DEFINITIONS_DIR") + "/topology_light_writer.mdf"})
+            *DataWriter(mbd_standard_data_writer, "Write MBD Standard Sets", 
+                def_mbd_std_data_writer, { getenv("MDL_DEFINITIONS_DIR") + "/data_writer.mdf"})
+            *EntityChecker(mbd_standard_entity_checker, "Check MBD Standard Entities", 
+                def_mbd_std_ent_checker, { getenv("MDL_DEFINITIONS_DIR") + "/check_entity.mdf"})
+
+                    *RegisterSolver(MotionSolve, "MotionSolve", SOLVER_INPUT_EXT, "xml",
+            SOLVER_DLL, { getenv("mv_solver_writers") + "/osxml_writer.dll" })
+            *RegisterSolver(ADAMS, "ADAMS", SOLVER_INPUT_EXT, "adm", SOLVER_COMMAND_EXT, "acf",
+            SOLVER_DLL, { getenv("mv_solver_writers") + "/adams_writer.dll" })
+            *RegisterSolver(ABAQUS, "ABAQUS", SOLVER_INPUT_EXT, "inp",
+            SOLVER_DLL, { getenv("mv_solver_writers") + "/abaq_writer" })
+            
+            RegisterSolver(DADS, "DADS", SOLVER_INPUT_EXT, "fm3",
+            SOLVER_DLL, { getenv("mv_solver_writers") + "/dads_writer" }, GROUP_NAME, Experimental )
+            RegisterSolver(NASTRAN, "NASTRAN", SOLVER_INPUT_EXT, "bdf",
+            SOLVER_DLL, { getenv("mv_solver_writers") + "/nast_writer" }, GROUP_NAME, Experimental )
+            RegisterSolver(DYNA, "LS-DYNA", SOLVER_INPUT_EXT, "key",
+            SOLVER_DLL, { getenv("mv_solver_writers") + "/dyna_writer" }, GROUP_NAME, Experimental )
+            RegisterSolver(MADYMO, "MADYMO", SOLVER_INPUT_EXT, "xml",
+            SOLVER_DLL, { getenv("mv_solver_writers") + "/mady_writer" }, GROUP_NAME, Experimental )
+            RegisterSolver(OptiStruct FEA (FEM), "OptiStructFEA", SOLVER_INPUT_EXT, "fem",
+            SOLVER_DLL, { getenv("mv_solver_writers") + "/nast_writer" })
+
+            *RegisterReader(ADAMS, "ADAMS", SOLVER_INPUT_EXT, adm, SOLVER_DLL, { getenv("mv_readers") + "/adams_reader"})
+            
+            {machtype = sysid()}
+            {if (machtype == "windows")}
+                // This assumes that the registry entries will be in PC format
+                // with backslash separators instead of "/" separators 
+                //  (i.e. D:\directory\file).
+                *RegisterReportsLog({ getenv("USERPROFILE") + "\.reports"})     
+                *RegisterSolverScript( MotionSolve,     "MotionSolve",     MotionSolve, { getenv("ALTAIR_HOME") + "/hwsolvers/scripts" + "/motionsolve.bat" }, ARGUMENTS, -screen, SOLVER_INPUT ) 
+                *RegisterSolverScript( MotionSolve_HST, "MotionSolve_HST", MotionSolve, { getenv("ALTAIR_HOME") + "/hwsolvers/scripts" + "/motionsolve.bat" }, ARGUMENTS, SOLVER_INPUT ) 
+            {else}
+                *RegisterReportsLog({ getenv("HOME") + "/.reports"})
+                *RegisterSolverScript( MotionSolve, "MotionSolve", MotionSolve, { getenv("ALTAIR_HOME") + "/scripts/motionsolve"}, ARGUMENTS, "-screen", SOLVER_INPUT )
+                *RegisterSolverScript( MotionSolve_HST, "MotionSolve_HST", MotionSolve, { getenv("ALTAIR_HOME") + "/scripts/motionsolve " }, ARGUMENTS, SOLVER_INPUT )
+            {endif}
+
+            *RegisterDefaultSolver(MotionSolve)
+
+			// Register short paths to be recognized by MotionView
+			*RegisterShortPath( "autoent", { getenv("ALTAIR_HOME") + "/hw/mdl/autoentities/"} ) 
+
+        *EndMdlDefaults()
+    
+        {mv_new_features = getenv("ALTAIR_MV_NEW_FEATURES")}
+        {if (mv_new_features == "1")} 
+            *BeginMenu(Directors, "Directors")
+                *MenuItem(durability_manager, "Suspension Director", TCL, {getenv("ALTAIR_HOME") + "/hw/profiles/Suspension_Director/startupsd.tcl"})
+            *EndMenu()
+        {endif}
+
+        *RegisterCustomWizard(fil2mrf, "ABAQUS Fil -> Altair Formats", { getenv("ALTAIR_HOME") + "/utility/mbd/custom_wizards/" + "fil2mrf.mdl" })
+        *RegisterCustomWizard(mvg, "MV Gfile Trans", { getenv("ALTAIR_HOME") + "/utility/mbd/custom_wizards/" + "mvg.mdl" })
+        
+    *EndModelDefaults()
+    {machtype = sysid()}
+    {if (machtype == "windows")}
+      *BeginPlotDefaults()
+         *RegisterExternalReader({ getenv("ALTAIR_HOME")  + "/hw/profiles/durability/bin/" + sysarch() + "/hg_durcsv.exe" }, "Comma Separated Values (*.csv)", "*.csv")      
+      *EndPlotDefaults()
+    {endif}
+ 
+	
+	*BeginTemplexFunctions()
+	{include "./templex_functions/eval_gear_ratio_for_gear.inc"}
+  {include "./templex_functions/saturation.inc"}  
+	*EndTemplexFunctions() 

@@ -1,0 +1,107 @@
+{ custom_wizards_dir  = getenv("ALTAIR_HOME") + "/utility/mbd/custom_wizards/" }
+{ function_key_script_file = getenv("ALTAIR_HOME") + "/utility/scripts/function_keys.tcl"}
+
+    // Preferences for tools for Altair HyperWorks
+    // This is a installation file and may be overwritten during a 
+    // service pack installation. Do not edit. 
+    // WARNING : This file cannot be used as a preference file independently.
+    //           This file needs to be included by a main preference file.
+
+	*BeginResources()   
+        
+        // Model readers.
+		*RegisterSharedReader("h3d","Hyper3D Reader", "*.h3d", model_result)        
+        *RegisterSharedReader("abaqus", "ABAQUS Model Input Reader", "*inp;*.pes", model)
+        *RegisterSharedReader("adams_shl", "ADAMS SHL File", "*.shl", model)
+        *RegisterSharedReader("altair_g", "ALTAIR G File", "*.g", model)
+        *RegisterSharedReader("altair_maf", "Altair Model Animation File", "*.maf", model)
+        *RegisterSharedReader("dads_gmod", "DADS GMOD File", "*g.mod", model)
+        *RegisterSharedReader("nastran", "NASTRAN Model Input Reader", "*.bdf;*.dat;*.blk", model)
+        *RegisterSharedReader("optistruct", "OptiStruct Input Reader", "*.fem;*.parm", model)
+        *RegisterSharedReader("pamcrash2G", "PAMCRASH2G Model Input Reader", "*.pc;*.dat", model)
+        *RegisterSharedReader("pamcrash", "PAM-CRASH Model Input Reader", "*.pc;*.dat",  model)
+        *RegisterSharedReader("patran", "PATRAN Model Input Reader", "*.pat;*.out", model)
+        *RegisterSharedReader("wavefront_obj", "WAVEFRONT OBJ File", "*.obj", model)
+        *RegisterSharedReader("ansys", "ANSYS Model Input Reader", "*.cdb", model)
+        *RegisterSharedReader("dads_def", "DADS DEF File", "*.def", model)
+        *RegisterSharedReader("dynakey","LS-DYNA Keyword Input Reader", "*.k;*.key;*.dyn*;*.bdf", model)
+        *RegisterSharedReader("permas", "PERMAS Model Input Reader", "*", model)
+        *RegisterSharedReader("radiossblk", "RADIOSS (D) Input Reader", "*D00;*.RAD", model)
+        *RegisterSharedReader("marc", "MARC Model Input Reader", "*.dat", model)
+        *RegisterSharedReader("medina_bif_mx", "Medina BIF Input Reader", "*.bif", model)
+        *RegisterSharedReader("advc","ADVC Reader", "*.adv", model_result)
+        // Result readers.
+        
+        *RegisterSharedReader("abaqus_odb_stub", "ABAQUS ODB Result Reader", "*.odb", model_result)
+        *RegisterSharedReader("adams_gra","ADAMS Graphics File", "*.gra", model_result)
+        *RegisterSharedReader("adams_res","ADAMS Results File", "*.res", result)
+        *RegisterSharedReader("altair_flx", "Altair FLX File", "*.flx", model_result)
+        *RegisterSharedReader("altair_mrf", "Altair Mrf File", "*.Mrf", result)
+        *RegisterSharedReader("ansys_res_90", "ANSYS 9.0 Result Reader", "*.rth;*.rst;*.rmg", model_result)
+        *RegisterSharedReader("ansys_res", "ANSYS Result Reader", "*.rth;*.rst;*.rmg", model_result)
+        *RegisterSharedReader("d3plot","LS-DYNA d3plot Result Reader","*d3plot*;*d3int*;*intfor*;*.ptf*;*d3eigv*", model_result)
+        *RegisterSharedReader("dlm", "DLM and LS-DYNA dynain Reader", "*dynain*", model_result)
+        *RegisterSharedReader("dsy","PAM-CRASH DSY Result Reader", "*.dsy", model_result)
+        *RegisterSharedReader("dyna_db", "DYNA DB Reader", "*.db", model_result)
+        *RegisterSharedReader("ensight", "CFD Ensight Reader", "*.encas;*.case", model_result)
+        
+    {if(hwdesktop==1)}
+            *RegisterSharedReader("h3d_legacy", "Hyper3D Legacy Data Reader", "*.h3d", model_result)
+    {endif}
+        *RegisterSharedReader("hmres", "HyperMesh Result Reader", "*.res;*.hmres;*.hyp", result)
+        *RegisterSharedReader("acusolve_hv", "AcuSolve Result Reader", "*.Log", model_result)
+        *RegisterSharedReader("madymo_fai", "MADYMO FAI File Reader", "*.fai", result)
+        *RegisterSharedReader("madymo_kn3", "MADYMO KIN3 File Reader", "*.kin3;*.kn3", model_result)
+        *RegisterSharedReader("marc_t16", "MARC t16 Result Reader", "*.t16", model_result)
+        *RegisterSharedReader("moldflow", "Moldflow Result Reader", "*.udm", model_result)
+        *RegisterSharedReader("nast_op2","NASTRAN/OptiStruct OP2 Result Reader","*.op2", model_result)
+        *RegisterSharedReader("nike3d", "Nike3D n3plot Result Reader", "n3plot*", model_result)
+        *RegisterSharedReader("radioss_a", "RADIOSS (A) Result Reader", "*A001;*.gz", model_result)
+        *RegisterSharedReader("unv", "UNV Reader", "*.unv", model_result)
+        *RegisterSharedReader("femzip_dsy", "FEMZIP DSY Reader", "*.fz", model_result)        
+        *RegisterSharedReader("femzip_dyna", "FEMZIP d3plot Reader", "*.fz", model_result)
+        *RegisterSharedReader("femzip_radioss", "FEMZIP Radioss Reader", "*.fz", model_result)
+		*RegisterSharedReader("femzip_nast_op2", "FEMZIP NASTRAN/OptiStruct Reader", "*.fz", model_result)
+        *RegisterSharedReader("xdb_reader", "NASTRAN XDB Result Reader", "*.xdb", model_result)
+        *RegisterSharedReader("medina_bof", "Medina BOF Result Reader", "*.bof", result)
+        *RegisterSharedReader("hwascii", "HW Ascii Result Reader", "*.hwascii", result)
+        *RegisterSharedReader("rmxml", "ResultModule XML Reader", "*.xml", model_result)
+        *RegisterSharedReader("pamhdf", "PAM-CRASH HDF5 Reader", "*.erfh5", model_result)
+        
+        //  Used by the HG client only.
+        *RegisterSharedReader("dads_bin", "DADS bin File", "*.bin")
+        
+    *EndResources()
+    
+    *BeginCustomWizards()
+        *RegisterCustomWizard(fil2mrf, "ABAQUS Fil -> Altair Formats", { custom_wizards_dir  + "fil2mrf.mdl" })
+        *RegisterCustomWizard(mvg, "MV Gfile Trans", { custom_wizards_dir  + "mvg.mdl" })
+    *EndCustomWizards()	
+	
+
+    *RegisterFunctionKeyProcedure(12,0,{getenv("ALTAIR_HOME") + "/utility/scripts/function_keys.tcl"},::function_key_menu::save_session)
+    
+    *RegisterFunctionKeyProcedure(1,1,{function_key_script_file},::function_key_menu::prev_page)
+    *RegisterFunctionKeyProcedure(2,1,{function_key_script_file},::function_key_menu::next_page)
+    *RegisterFunctionKeyProcedure(3,1,{function_key_script_file},::function_key_menu::add_page)
+    *RegisterFunctionKeyProcedure(4,1,{function_key_script_file},::function_key_menu::expand_window)
+    *RegisterFunctionKeyProcedure(5,1,{function_key_script_file},::hw::ToggleBrowser)
+    *RegisterFunctionKeyProcedure(6,1,{function_key_script_file},::hw::ToggleFullScreen)
+    *RegisterFunctionKeyProcedure(7,1,{function_key_script_file},"::function_key_menu::change_layout -1")
+    *RegisterFunctionKeyProcedure(8,1,{function_key_script_file},"::function_key_menu::change_layout 1")
+    *RegisterFunctionKeyProcedure(9,1,{function_key_script_file},::function_key_menu::new_session)
+
+    *RegisterFunctionKeyProcedure(11,1,{function_key_script_file},::function_key_menu::open_session)
+     RegisterFunctionKeyProcedure(12,1,{function_key_script_file},::function_key_menu::save_session)
+
+    *RegisterFunctionKeyProcedure(1,2,{function_key_script_file},"::function_key_menu::print_to_default_printer landscape")
+    *RegisterFunctionKeyProcedure(2,2,{function_key_script_file},"::function_key_menu::print_to_file landscape")
+    *RegisterFunctionKeyProcedure(3,2,{function_key_script_file},"::function_key_menu::print_to_default_printer portrait")
+     RegisterFunctionKeyProcedure(4,2,{function_key_script_file},"::function_key_menu::print_to_file portrait")
+    *RegisterFunctionKeyProcedure(5,2,{function_key_script_file},::function_key_menu::capture_screen)
+    *RegisterFunctionKeyProcedure(6,2,{function_key_script_file},::function_key_menu::capture_window)
+    *RegisterFunctionKeyProcedure(7,2,{function_key_script_file},::function_key_menu::capture_animation)
+    *RegisterFunctionKeyProcedure(8,2,{function_key_script_file},::function_key_menu::capture_animation_box)
+    *RegisterFunctionKeyProcedure(9,2,{function_key_script_file},::function_key_menu::export_h3d)
+
+

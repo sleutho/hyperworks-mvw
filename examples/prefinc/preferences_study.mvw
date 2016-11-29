@@ -1,0 +1,72 @@
+// Preferences Altair HyperWorks - HyperStudy
+// This is an installation file and may be overwritten during a 
+// service pack installation. Do not edit. 
+// WARNING : This file cannot be used as a preference file independently.
+//           This file needs to be included by a main preference file.
+
+*BeginStudyDefaults()
+
+	*BeginStudyProperties()
+		 DisplayPrecision(18)
+	*EndStudyProperties()
+
+	*BeginSolverDefaults()
+		*RegisterSolverScript(radioss, "RADIOSS",    { getenv("radioss_launch") }, HST_SolverRadioss)
+		*RegisterSolverScript(os,      "OptiStruct", { getenv("opti_launch") },    HST_SolverOptiStruct)
+
+{if(getenv("HYPERWORKS_EDU_EDITION") != "1")}
+		*RegisterSolverScript(templex, "Templex",    { getenv("templex_launch") }, HST_SolverGeneric)
+{endif}
+
+{if(fileinfo(getenv("hx_bindir"),"size") != -1)}
+		*RegisterSolverScript(hx, "HyperXtrude", { getenv("hx_launch") }, HST_SolverGeneric)
+{endif}
+
+		*RegisterSolverScript(py,  "Python", { getenv("python_fullpath") }, HST_SolverGeneric)
+		*RegisterSolverScript(tcl, "Tcl",    { getenv("tclsh_fullpath") },  HST_SolverGeneric)
+
+		 RegisterSolverScript(spawn, "HST_SolverSpawn", { getenv("radioss_launch") },  HST_SolverSpawn)
+		 RegisterSolverScript(stdy,  "HyperStudy",      { getenv("hstbatch_launch") }, HST_SolverGeneric)
+
+{if(fileinfo(getenv("hmath_bindir"),"size") != -1)}
+		*RegisterSolverScript(hmath,  "HyperMath",      { getenv("hmath_batchlaunch") }, HST_SolverGeneric)
+{endif}
+		*RegisterSolverScript(ms, "MotionSolve - standalone", { getenv("motionsolve_launch") }, HST_SolverMotionSolve)
+
+{if(fileinfo(getenv("fekorun_launch"),"size") != -1)}
+		*RegisterSolverScript(feko,    "FEKO",                 { getenv("fekorun_launch") },  HST_SolverFeko)
+		 RegisterSolverScript(feko_me, "FEKO Multi-Execution", { getenv("fekopost_launch") }, HST_SolverGeneric, --run-script {chr(34) + getenv("feko_scriptdir") + "/hst/runfeko_pf.lua" + chr(34)} --non-interactive)				
+{endif}
+
+		 // The following are here to provide an example of what _might_ be appropriate.  The actual path will vary from system to system
+		 RegisterSolverScript(HstSolver_Wbpj, "Work Bench", "<installDir>/<rev>/Framework/bin/Linux64/runwb2", HstSolver_Wbpj) 
+         RegisterSolverScript(hvtrans, "HV Trans",{getenv("hvtrans_launch")}, HST_SolverGeneric)
+         RegisterSolverScript(HstSolver_Flux, "Flux", { getenv("INSTALLFLUX")+"/Bin/prg/win64/flux.exe" }, HstSolver_Flux) 
+
+	*EndSolverDefaults()
+
+	 BeginUserUtilityDefaults()
+	     RegisterUserUtility(uu_01, "UserU Example 01", { getenv("python_fullpath")}, "c:/users/jd/bin/py/myprocess.py")
+	 EndUserUtilityDefaults()
+
+	*BeginExternalOptimizerDefaults()
+		*RegisterExternalOptimizer(xopt, "Xopt", { getenv("xopt_launch") })
+	*EndExternalOptimizerDefaults()
+    
+    *BeginProfiles()
+		*RegisterProfile({getenv("ALTAIR_HOME") + "/hst/etc/profiles/maximum.xml"})
+		RegisterProfile({getenv("ALTAIR_HOME") + "/hst/etc/profiles/default.xml"})
+		*RegisterProfile({getenv("ALTAIR_HOME") + "/hst/etc/profiles/introductory.xml"})
+		RegisterProfile({getenv("ALTAIR_HOME") + "/hst/etc/profiles/minimal_plus.xml"})
+		*RegisterProfile({getenv("ALTAIR_HOME") + "/hst/etc/profiles/minimal.xml"})
+	*EndProfiles()
+
+*EndStudyDefaults()
+
+*BeginPythonReaderDefaults()
+    *RegisterPythonReader({getenv("ALTAIR_HOME") + "/hst/io/result_readers/hstp/hstreaderpdd.py"}, "hstp reader", "*.hstp")
+*EndPythonReaderDefaults()
+
+*BeginPlotDefaults()
+    *RegisterPythonFunction("readexcelfile", {getenv("ALTAIR_HOME") + "/hst/io/external_funcs/py/hstreaderxls.py"}, 4)
+*EndPlotDefaults()

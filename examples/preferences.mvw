@@ -1,0 +1,46 @@
+// HWVERSION_8.0a14_Jun 17 2005_12:31:0
+
+// Preference file for Altair HyperWorks
+// This is the installation preference file and may be overwritten during a 
+// service pack installation. Do not edit. Please use "Set Preferences File..." 
+// under the File menu for specifying customized preferences files.
+
+*Id("HyperWorks v8.0")
+{hwdesktop=1}
+*BeginDefaults()
+{machtype = sysid()}
+{if (machtype != "windows")}
+    *DefaultFileAccessFromWorkingDirectory(true)
+{endif}
+    *ClosestTimeSync(On)
+    *DefaultMaxFrameRate(100)
+    
+    // 2D plot client preferences
+    {include getenv("ALTAIR_HOME") + "/hw/prefinc/preferences_plot.mvw"}
+
+    // 3D plot client preferences
+    {include getenv("ALTAIR_HOME") + "/hw/prefinc/preferences_plot3d.mvw"}
+    
+    // fe-pre client preferences
+    {include getenv("ALTAIR_HOME") + "/hw/prefinc/preferences_fepre.mvw"}
+    
+    // post client preferences
+    {include getenv("ALTAIR_HOME") + "/hw/prefinc/preferences_post.mvw"}
+        
+    // mbd client preferences
+    {include getenv("ALTAIR_HOME") + "/hw/prefinc/preferences_mbd.mvw"}
+  
+    // generic tools preferences
+    {include getenv("ALTAIR_HOME") + "/hw/prefinc/preferences_tools.mvw"}
+
+    //video client preference
+    {include getenv("ALTAIR_HOME") + "/hw/prefinc/preferences_video.mvw"}			
+
+    // hw application preferences
+    {include getenv("ALTAIR_HOME") + "/hw/prefinc/preferences_app.mvw"}
+
+
+*EndDefaults()
+
+// palette preferences
+{include getenv("ALTAIR_HOME") + "/hw/prefinc/preferences_palette.mvw"}

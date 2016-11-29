@@ -1,0 +1,138 @@
+// This file contains all the function registration entries common for preferences_plot.mvw and preferences_plot3d.mvw preference files.
+// This is a installation file and may be overwritten during a 
+// service pack installation. Do not edit. 
+// WARNING : This file cannot be used as a preference file independently.
+//           This file needs to be included by a preferences_plot.mvw and preferences_plot3d.mvw file.
+//
+{ if (eval("preferences_common_plot_functions_included") == "") }
+    *RegisterExternalFunction("correl",       { external_funcs_dir + "/cross_correlation.exe" }, 2)
+    *RegisterExternalFunction("cod",       { external_funcs_dir + "/cod.exe" }, 3)
+{ if (sysid() == "windows") }
+    *RegisterExternalFunction("olc",       { external_funcs_dir + "/olc.dll" }, 3)
+{ elseif (sysid() == "linux") }
+    *RegisterExternalFunction("olc",       { external_funcs_dir + "/libolc.so" }, 3)
+{ elseif (sysid() == "macosx") }
+    *RegisterExternalFunction("olc",       { external_funcs_dir + "/libolc.dylib" }, 3)
+{ endif }
+{ if (sysid() == "windows") }
+    *RegisterExternalFunction("mstep",       { external_funcs_dir + "/mstep.dll" }, 7)
+{ elseif (sysid() == "linux") }
+    *RegisterExternalFunction("mstep",       { external_funcs_dir + "/libmstep.so" }, 7)
+{ elseif (sysid() == "macosx") }
+    *RegisterExternalFunction("mstep",       { external_funcs_dir + "/libmstep.dylib" }, 7)
+{ endif }
+{ if (sysid() == "windows") }
+    *RegisterExternalFunction("kth",       { external_funcs_dir + "/kth.dll" }, 5)
+{ elseif (sysid() == "linux") }
+    *RegisterExternalFunction("kth",       { external_funcs_dir + "/libkth.so" }, 5)
+{ elseif (sysid() == "macosx") }
+    *RegisterExternalFunction("kth",       { external_funcs_dir + "/libkth.dylib" }, 5)
+{ endif }
+{ if (sysid() == "windows") }
+    *RegisterExternalFunction("automir",       { external_funcs_dir + "/automir.dll" }, 4)
+{ elseif (sysid() == "linux") }
+    *RegisterExternalFunction("automir",       { external_funcs_dir + "/libautomir.so" }, 4)
+{ elseif (sysid() == "macosx") }
+    *RegisterExternalFunction("automir",       { external_funcs_dir + "/libautomir.dylib" }, 4)
+{ endif }
+{ if (sysid() == "windows") }
+	*RegisterExternalFunction("hic",       { external_funcs_dir + "/hic.dll" }, 3)
+{ elseif (sysid() == "linux") }
+	*RegisterExternalFunction("hic",       { external_funcs_dir + "/libhic.so" }, 3)
+{ elseif (sysid() == "macosx") }
+    *RegisterExternalFunction("hic",       { external_funcs_dir + "/libhic.dylib" }, 3)
+{ endif }
+    *RegisterExternalFunction("clip",       { external_funcs_dir + "/clip.exe" }, 3)
+    *RegisterExternalFunction("clip_continuous", { external_funcs_dir + "/clip_continuous.exe" }, 3)
+    *RegisterExternalFunction("clip_cumulative", { external_funcs_dir + "/clip_cumulative.exe" }, 3)
+    *RegisterExternalFunction("remove_succ_dup_indx", { external_funcs_dir + "/remove_succ_dup_indx.exe" }, 1)
+    *RegisterExternalFunction("barchart",   { external_funcs_dir + "/bar.exe" }, 3)
+    *RegisterExternalFunction("fir100",     { external_funcs_dir + "/fir100.exe" }, 3)
+    *RegisterExternalFunction("butterworth",{ external_funcs_dir + "/bwfilt.exe" }, 3)
+    *RegisterExternalFunction("hicd",       { external_funcs_dir + "/hicd.exe" }, 3)
+    *RegisterExternalFunction("histogram",  { external_funcs_dir + "/histo.exe" }, 3)
+    *RegisterExternalFunction("nij",        { external_funcs_dir + "/nij.exe" }, 6)
+    *RegisterExternalFunction("nkm", 	     { external_funcs_dir + "/nkm.exe" }, 3)
+    *RegisterExternalFunction("saefilt95",  { external_funcs_dir + "/sae1995.exe" }, 5)
+    *RegisterExternalFunction("duration",   { external_funcs_dir + "/duration.exe" }, 3)
+    *RegisterExternalFunction("iso6487",    { external_funcs_dir + "/iso6487.exe" }, 3)
+    *RegisterExternalFunction("th_bandpass_butter",    { external_funcs_dir + "/th_bandpass_butter.exe" }, 4)
+    *RegisterExternalFunction("th_butter",  { external_funcs_dir + "/th_butter.exe" }, 4)
+    *RegisterExternalFunction("th_cfc",     { external_funcs_dir + "/th_cfc.exe" }, 4)
+    *RegisterExternalFunction("th_fir100",  { external_funcs_dir + "/th_fir100.exe" }, 2)
+    *RegisterExternalFunction("th_four",    { external_funcs_dir + "/th_four.exe" }, 3)
+    *RegisterExternalFunction("th_sae",     { external_funcs_dir + "/th_sae.exe" }, 4)
+    *RegisterExternalFunction("th_tche",    { external_funcs_dir + "/th_tche.exe" }, 3)
+    *RegisterExternalFunction("fuse",       { external_funcs_dir + "/fuse.exe" }, 1)
+    *RegisterExternalFunction("rainflow",   { external_funcs_dir + "/rainflow.exe" }, 6)
+    *RegisterExternalFunction("levelcrossing",   { external_funcs_dir + "/levelcrossing.exe" }, 3) 
+    *RegisterExternalFunction("timeatlevel",   { external_funcs_dir + "/timeatlevel.exe" }, 5)                 
+    *RegisterExternalFunction("fftwimag", 	{ external_funcs_dir + "/fftwimag.exe" }, 2)
+    *RegisterExternalFunction("fftwmag", 	{ external_funcs_dir + "/fftwmag.exe" }, 2)
+    *RegisterExternalFunction("fftwphase", 	{ external_funcs_dir + "/fftwphase.exe" }, 2)
+    *RegisterExternalFunction("fftwreal",   	{ external_funcs_dir + "/fftwreal.exe" }, 2)
+    *RegisterExternalFunction("ifftw", 	{ external_funcs_dir + "/ifftw.exe" }, 2)
+    *RegisterExternalFunction("psdfftw",   	{ external_funcs_dir + "/psdfftw.exe" }, 2)
+    *RegisterExternalFunction("blockfftwimag", { external_funcs_dir + "/blockfftwimag.exe" }, 4)
+    *RegisterExternalFunction("blockfftwmag",  { external_funcs_dir + "/blockfftwmag.exe" }, 4)
+    *RegisterExternalFunction("blockfftwphase",{ external_funcs_dir + "/blockfftwphase.exe" }, 4)
+    *RegisterExternalFunction("blockfftwreal", { external_funcs_dir + "/blockfftwreal.exe" }, 4) 
+    *RegisterExternalFunction("psd5fftw", 	{ external_funcs_dir + "/psd5fftw.exe" }, 4)     
+    *RegisterExternalFunction("besselfilterdigital", 	{ external_funcs_dir + "/digital_bessel_filter.exe" }, 5)
+    *RegisterExternalFunction("stress", 	{ external_funcs_dir + "/stresses.exe" }, 8)
+    *RegisterExternalFunction("nr", 	{ external_funcs_dir + "/nr.exe" }, 5)
+    *RegisterExternalFunction("sgcm", 	{ external_funcs_dir + "/sgcm.exe" }, 4)
+    *RegisterExternalFunction("deviation_metric", 	{ external_funcs_dir + "/deviation_metric.exe" }, 3)
+    *RegisterExternalFunction("akimaderivative", 	{ external_funcs_dir + "/akimaderivative.exe" }, 3)
+
+    {if (sysid() == "windows")}
+        *RegisterExternalFunction("olc",       { external_funcs_dir + "/olc.dll" }, 3)
+    {endif} 
+    {if (sysid() == "macosx")}
+        *RegisterExternalFunction("olc",       { external_funcs_dir + "/libolc.dylib" }, 3)
+    {endif} 
+    {if (sysid() == "linux")}
+        *RegisterExternalFunction("olc",       { external_funcs_dir + "/libolc.so" }, 3)
+    {endif}           
+
+    *SetFunctionUnitPolicy("akimaderivative", "derivative")
+    *SetFunctionUnitPolicy("saefilt95", "second parameter")
+    *SetFunctionUnitPolicy("th_bandpass_butter", "second parameter")
+    *SetFunctionUnitPolicy("th_butter", "second parameter")
+    *SetFunctionUnitPolicy("th_cfc", "second parameter")
+    *SetFunctionUnitPolicy("th_fir100", "second parameter")
+    *SetFunctionUnitPolicy("th_four", "second parameter")
+    *SetFunctionUnitPolicy("th_sae", "second parameter")
+    *SetFunctionUnitPolicy("th_tche", "second parameter")
+    *SetFunctionUnitPolicy("butterworth", "second parameter")
+    *SetFunctionUnitPolicy("clip_continuous", "second parameter")
+    *SetFunctionUnitPolicy("clip_cumulative", "second parameter")
+    *SetFunctionUnitPolicy("duration", "variable", 3, 0.0, "s", 1.0, "second parameter")
+    *SetFunctionUnitPolicy("fir100", "second parameter")
+    *SetFunctionUnitPolicy("iso6487", "second parameter")
+    *SetFunctionUnitPolicy("barchart", "first parameter")
+    *SetFunctionUnitPolicy("histogram", "first parameter")
+    *SetFunctionUnitPolicy("fuse", "first parameter")
+    *SetFunctionUnitPolicy("hic", "variable", 4, 1.0, "ms", 2.0, "gravities", 5.0, "gravities")
+    *SetFunctionUnitPolicy("hicd", "variable", 4, 1.0, "ms", 2.0, "gravities", 3.0, "gravities")
+    *SetFunctionUnitPolicy("clip", "variable", 4, 1.0, "ms", 2.0, "gravities", 3.0, "")
+    *SetFunctionUnitPolicy("nij", "fixed", "")
+	*SetFunctionUnitPolicy("kth", "variable", 4, 2.0, "s", 3.0, "N")
+	*SetFunctionUnitPolicy("automir", "none")
+
+    *SetFunctionUnitExpectations("clip", "s", "gravities", "ms")
+    *SetFunctionUnitExpectations("nij", "N", "N", "Nm")
+    *SetFunctionUnitExpectations("hic", "s", "gravities", "ms")
+    *SetFunctionUnitExpectations("hicd", "s", "gravities", "ms")
+    *SetFunctionUnitExpectations("duration", "s")
+    *SetFunctionUnitExpectations("olc", "s", "m/s")
+    *SetFunctionUnitExpectations("kth", "s", "N")
+
+
+    *SetFunctionUnitExpectations("saefilt95", "s")
+    *SetFunctionUnitExpectations("iso6487", "s")
+    *SetFunctionUnitExpectations("butterworth", "s")
+    *SetFunctionUnitExpectations("fir100", "s")
+    *SetFunctionUnitExpectations("saefilter", "s")
+    { preferences_common_plot_functions_included = "true" }
+{ endif }

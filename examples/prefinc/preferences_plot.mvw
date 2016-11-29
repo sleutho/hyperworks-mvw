@@ -1,0 +1,197 @@
+// Preferences for plotting client for Altair HyperWorks
+// This is a installation file and may be overwritten during a 
+// service pack installation. Do not edit. 
+// WARNING : This file cannot be used as a preference file independently.
+//           This file needs to be included by a main preference file.
+
+{import_templates_dir = getenv("TEMPLATES_DIR") + "/import/"}
+{export_templates_dir = getenv("TEMPLATES_DIR") + "/export/"}
+{external_readers_dir = getenv("EXTERNALREADERS_DIR")}
+{external_writers_dir = getenv("EXTERNALWRITERS_DIR")}
+{external_funcs_dir   = getenv("EXTERNALFUNCS_DIR")}
+{tclscript_dir        = getenv("hw_tcl_common") + "/hwplot/"}
+{publish_script       = getenv("hw_tcl_common") + "/hw/publish/ppt/publishPptInit.tcl"}
+{utility_scripts_dir  = getenv("ALTAIR_HOME") + "/utility/scripts/"}
+{context_menu_script  = utility_scripts_dir + "plotting/general_context_menu_curve.tcl"}
+{vst_script           = getenv("ALTAIR_HOME") + "/utility/VehicleSafetyTools/mv_hv_hg/include/context_menu_curve.tcl"}
+
+*BeginPlotDefaults()
+
+{ preferences_common_plot_included = "" }
+
+     {include getenv("ALTAIR_HOME") + "/hw/prefinc/preferences_common_plot.mvw"}     
+ {if(hwdesktop==1)}
+     *ContextMenuItem(mainmenu,"HG ApplyStyle...",{utility_scripts_dir + "/plotting/plotApplyStyle.tcl"},,plot)
+     ContextMenuItem(mainmenu,"Convert Units...",{utility_scripts_dir + "UnitConverter.tcl"},::unitconverter::Main,axis)
+     *ContextMenuItem(mainmenu,"View Dependencies...",{utility_scripts_dir + "CurveDependency.tcl"},::plot::Dependency::DependencyMain,xy_curve)
+     *ContextMenuItem(mainmenu,"View Dependencies...",{utility_scripts_dir + "CurveDependency.tcl"},::plot::Dependency::DependencyMain,bar_curve)
+     *ContextMenuItem(mainmenu,"View Dependencies...",{utility_scripts_dir + "CurveDependency.tcl"},::plot::Dependency::DependencyMain,complex_curve)
+     *ContextMenuItem(mainmenu,"View Dependencies...",{utility_scripts_dir + "CurveDependency.tcl"},::plot::Dependency::DependencyMain,polar_curve)
+     *BeginContextMenu(modelMenu, "Highlight Source Entity in Model...")
+     	*ContextMenuItem(modelMenu,"Highlight On",{utility_scripts_dir + "HighlightSourceInPost.tcl"},::plot::HighlightSourceInPost::EntityFunction 1,curve)
+     	*ContextMenuItem(modelMenu,"Highlight Off",{utility_scripts_dir + "HighlightSourceInPost.tcl"},::plot::HighlightSourceInPost::EntityFunction 2,curve)
+     	*ContextMenuItem(modelMenu,"Isolate",{utility_scripts_dir + "HighlightSourceInPost.tcl"},::plot::HighlightSourceInPost::EntityFunction 3,curve)
+     	*ContextMenuItem(modelMenu,"Show",{utility_scripts_dir + "HighlightSourceInPost.tcl"},::plot::HighlightSourceInPost::EntityFunction 4,curve)
+     	*ContextMenuItem(modelMenu,"Hide",{utility_scripts_dir + "HighlightSourceInPost.tcl"},::plot::HighlightSourceInPost::EntityFunction 5,curve)
+     *EndContextMenu()
+     *ContextMenuItem(mainmenu,"Enable/Change Curve Unit...",{utility_scripts_dir + "/plotting/plotChangeUnits.tcl"},::UnitsProfile::DrawChangeUnitsGUI,xy_curve)
+     *ContextMenuItem(mainmenu,"Enable/Change Curve Unit...",{utility_scripts_dir + "/plotting/plotChangeUnits.tcl"},::UnitsProfile::DrawChangeUnitsGUI,complex_curve)
+     *ContextMenuItem(mainmenu,"Enable/Change Curve Unit...",{utility_scripts_dir + "/plotting/plotChangeUnits.tcl"},::UnitsProfile::DrawChangeUnitsGUI,polar_curve)
+     *ContextMenuItem(mainmenu,"Enable/Change Curve Unit...",{utility_scripts_dir + "/plotting/plotChangeUnits.tcl"},::UnitsProfile::DrawChangeUnitsGUI,bar_curve)	 	 	 	      
+
+     *BeginContextMenu(newmenu,"New")
+       *ContextMenuItem(newmenu,"Plots From File",{context_menu_script},::general_curve_context_menu::newbuildplots,xy_plot)
+       *ContextMenuItem(newmenu,"Plots From File",{context_menu_script},::general_curve_context_menu::newbuildplots,complex_plot)
+       *ContextMenuItem(newmenu,"Plots From File",{context_menu_script},::general_curve_context_menu::newbuildplots,polar_plot)
+
+       *ContextMenuItem(newmenu,"Math Curve",{context_menu_script},::general_curve_context_menu::newmathcurve,plot)
+       *ContextMenuItem(newmenu,"File Curve",{context_menu_script},::general_curve_context_menu::newfilecurve,plot)
+
+       *ContextMenuItem(newmenu,"Note",{context_menu_script},::general_curve_context_menu::newnote,xy_plot)
+       *ContextMenuItem(newmenu,"Note",{context_menu_script},::general_curve_context_menu::newnote,complex_plot)
+       *ContextMenuItem(newmenu,"Note",{context_menu_script},::general_curve_context_menu::newnote,bar_plot)
+
+       *ContextMenuItem(newmenu,"Datum Line - Horizontal",{context_menu_script},::general_curve_context_menu::newhorizdatumline,xy_plot)
+       *ContextMenuItem(newmenu,"Datum Line - Horizontal",{context_menu_script},::general_curve_context_menu::newhorizdatumline,complex_plot)
+       *ContextMenuItem(newmenu,"Datum Line - Horizontal",{context_menu_script},::general_curve_context_menu::newhorizdatumline,bar_plot)
+       *ContextMenuItem(newmenu,"Datum Line - Vertical",{context_menu_script},::general_curve_context_menu::newvertdatumline,xy_plot)
+       *ContextMenuItem(newmenu,"Datum Line - Vertical",{context_menu_script},::general_curve_context_menu::newvertdatumline,complex_plot)
+       ContextMenuItem(newmenu,"Datum Line - Vertical",{context_menu_script},::general_curve_context_menu::newvertdatumline,bar_plot)
+
+        ContextMenuItem(newmenu,"Math Function",{context_menu_script},::general_curve_context_menu::newfunction,plot)
+        ContextMenuItem(newmenu,"Plot Macro",{context_menu_script},::general_curve_context_menu::newmacro,plot)
+       *ContextMenuItem(newmenu,"Y Axis",{context_menu_script},::general_curve_context_menu::newyaxis,xy_plot)
+       *ContextMenuItem(newmenu,"Y Axis",{context_menu_script},::general_curve_context_menu::newyaxis,bar_plot)
+       *ContextMenuItem(newmenu,"X Axis",{context_menu_script},::general_curve_context_menu::newxaxis,xy_plot)
+     *EndContextMenu()
+
+     *BeginContextMenu(newmenu,"Custom Rendering")
+       ContextMenuItem(newmenu,"Box",{utility_scripts_dir + "/plotting/overrides/box.tcl"},Override,xy_plot)
+       *ContextMenuItem(newmenu,"Gauge",{utility_scripts_dir + "/plotting/overrides/gauge.tcl"},Override,xy_plot)
+       *ContextMenuItem(newmenu,"None",{utility_scripts_dir + "/plotting/overrides/none.tcl"},Override,xy_plot)
+       *ContextMenuItem(newmenu,"Pie Chart",{utility_scripts_dir + "/plotting/overrides/pie.tcl"},Override,bar_plot)
+       *ContextMenuItem(newmenu,"None",{utility_scripts_dir + "/plotting/overrides/none.tcl"},Override,bar_plot)
+     *EndContextMenu()
+
+     *ContextMenuItem(newymenu,"New Axis",{context_menu_script},::general_curve_context_menu::newcontextaxis,axis)
+     {endif} 
+     
+     *ContextMenuItem(mainmenu,"Properties...",{tclscript_dir + "plotMicroDialogs.tbc"},::hwplot::MicroDialogs::JumpToMicroDialog,xy_curve)
+     *ContextMenuItem(mainmenu,"Properties",{tclscript_dir + "plotMicroDialogs.tbc"},::hwplot::MicroDialogs::JumpToMicroDialog,axis)
+     *ContextMenuItem(mainmenu,"Properties...",{tclscript_dir + "plotMicroDialogs.tbc"},::hwplot::MicroDialogs::JumpToMicroDialog,legend)
+     *ContextMenuItem(mainmenu,"Properties...",{tclscript_dir + "plotMicroDialogs.tbc"},::hwplot::MicroDialogs::JumpToMicroDialog,datum)
+     
+     *BrowserContextMenuItem("Create Tag",{publish_script},::hw::publish::ppt::GUI::HgNoteContextMenu,note)
+
+      BrowserContextMenuItem("Export",{context_menu_script},::hwplot::exportcurves::ExportCurvesFromBrowser,curve)
+
+     *BeginBrowserContextMenu("Single Curve Math")
+          *BrowserContextMenuItem("Integral",{context_menu_script},::general_curve_context_menu::integrate_curve,curve)
+          *BrowserContextMenuItem("Double Integral",{context_menu_script},::general_curve_context_menu::dblintegrate_curve,curve)
+          *BrowserContextMenuItem("Derivative",{context_menu_script},::general_curve_context_menu::derivitive_curve,curve)
+          *BrowserContextMenuItem("Double Derivative",{context_menu_script},::general_curve_context_menu::dblderivitive_curve,curve)          
+          *BrowserContextMenuItem("Duration",{context_menu_script},::general_curve_context_menu::duration_curve,curve)
+          *BrowserContextMenuItem("Normalize over Max",{context_menu_script},::general_curve_context_menu::normalize_curve,curve)
+          *BrowserContextMenuItem("Reverse Curve",{context_menu_script},::general_curve_context_menu::reverse_curve,curve)
+          *BrowserContextMenuItem("Square",{context_menu_script},::general_curve_context_menu::square_curve,curve)
+          
+          //The following are provided via vst.mvw
+          *BrowserContextMenuItem("Max Note",{vst_script},::vst_curve_context_menu::max_note,curve)
+          *BrowserContextMenuItem("Min Note",{vst_script},::vst_curve_context_menu::min_note,curve)
+                              
+          *BeginBrowserContextMenu("Acoustic Weighting")
+                  *BrowserContextMenuItem("A",{context_menu_script},::general_curve_context_menu::A_weighting_curve,curve)
+                  *BrowserContextMenuItem("B",{context_menu_script},::general_curve_context_menu::B_weighting_curve,curve)
+                  *BrowserContextMenuItem("C",{context_menu_script},::general_curve_context_menu::C_weighting_curve,curve)
+                  *BrowserContextMenuItem("U",{context_menu_script},::general_curve_context_menu::U_weighting_curve,curve)               
+           *EndBrowserContextMenu()                     
+          
+                              
+     *EndBrowserContextMenu()
+   
+     *BeginBrowserContextMenu("Multiple Curves Math")
+          *BrowserContextMenuItem("Add",{context_menu_script},::general_curve_context_menu::add_selected_curves,curve)
+          *BrowserContextMenuItem("Average",{context_menu_script},::general_curve_context_menu::average_selected_curves,curve)
+          *BrowserContextMenuItem("Multiply",{context_menu_script},::general_curve_context_menu::multiply_selected_curves,curve)
+          *BrowserContextMenuItem("Subtract",{context_menu_script},::general_curve_context_menu::subtract_selected_curves,curve)
+          *BrowserContextMenuItem("Dot Product",{context_menu_script},::general_curve_context_menu::dotproduct_selected_curves,curve)
+          *BrowserContextMenuItem("Cross Product",{context_menu_script},::general_curve_context_menu::crossproduct_selected_curves,curve)
+          *BrowserContextMenuItem("RSS",{context_menu_script},::general_curve_context_menu::rss_selected_curves,curve)     
+          *BrowserContextMenuItem("RMS",{context_menu_script},::general_curve_context_menu::rms_selected_curves,curve)
+          *BrowserContextMenuItem("Campbell Diagram",{utility_scripts_dir + "campbelldiagram/campbelldiagram.tcl"},::campbell::GUI,curve)
+     *EndBrowserContextMenu()
+
+     *BrowserContextMenuItem("Autofit Curves",{context_menu_script},::general_curve_context_menu::autofit_curves,window)
+
+     *SetAnimBubbleColor(0)
+     *SetAxisColor(67)
+     *SetFrameColor(66)
+     *SetBackgroundColor(1)
+
+     { if (getenv("HW_THEME_VERSION") >= "2015") }
+     *SetGridLineColor(0)
+     { else }
+     *SetGridLineColor(9)
+     { endif }
+
+     *SetZeroLineColor(0)
+
+     *PlotHeaderColor(0)
+     *PlotFooterColor(0)
+     *SetLegendColor(0)
+     *PrintDisplayedBGColor("true")
+
+     *ResetCurveDefaults()
+     { if (getenv("HG_THEME_VERSION") >= "2015") }
+     { 
+       color = {22,18,55,46,24,54,38,0}
+       type = {1,2,5,3,4,2,3,5}
+       t=0
+       c=0
+       for(i=0;i<=62;i++)
+     }
+     *SetCurveDefaults({type[t]},{color[c]},1,0,{color[c]})
+     *SetBarDefaults({color[c]}, 0)
+     {  
+       c++
+       if(c==numpts(color))
+        c=0
+        t++
+       endif
+       if(t==numpts(type))
+        t=0
+       endif
+       endloop
+     }
+     { else }
+     { 
+       type = {1,2,5,3,4,2,3,5}
+       color = {22,18,55,46,50,24,54,38,0}
+       t=0
+       c=0
+       for(i=0;i<=62;i++)
+     }
+     *SetCurveDefaults({type[t]},{color[c]},1,0,{color[c]})
+     *SetBarDefaults({color[c]}, 0)
+     {  
+       t++
+       c++
+       if(t==numpts(type))
+        t=0
+       endif
+       if(c==numpts(color))
+        c=0
+       endif
+       endloop
+     }
+     { endif }
+
+
+*EndPlotDefaults()
+
+
+*BeginTemplexFunctions()
+{include "./templex_functions/psd5.inc"}
+{include "./templex_functions/rangepair.inc"}
+*EndTemplexFunctions()
+

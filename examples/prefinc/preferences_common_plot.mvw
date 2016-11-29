@@ -1,0 +1,114 @@
+
+// HWVERSION_14.0.0.14-ankitsankit_13120_BW_ifunc-dev11_Feb 25 2015_4:2:42
+// This file contains all the registration entries common for preferences_plot.mvw and preferences_plot3d.mvw preference files.
+// This is a installation file and may be overwritten during a 
+// service pack installation. Do not edit. 
+// WARNING : This file cannot be used as a preference file independently.
+//           This file needs to be included by a preferences_plot.mvw and preferences_plot3d.mvw file.
+//
+//Format to be used for registering external readers is as follows
+//RegisterExternalReader({ external_readers_dir + "/reader_name"}, "name of file type", "supported file extensions separated by space", ascii) 
+//Example: RegisterExternalReader({ external_readers_dir + "/hgtiemOrbit.exe"}, "TiemOrbit", "*.bus *.bum *.reb *.spr *.dmp", ascii) 
+
+{ if (eval("preferences_common_plot_included") == "") }
+
+     *EnableUnitScaling(true)
+
+     *SetPreloadMaximum(2000000000)
+     
+     *SetUseEvenCycles(false)
+
+     *RegisterExternalColumnReader({ external_readers_dir + "/hgtextcolumn.exe"})
+     *RegisterImportTemplate({ import_templates_dir + "hfdat.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "hfdat_fld.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "f06mass.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "f06mass_freq.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "abaqus_mass_new.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "adams_matrix.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "defgeo.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "excel2_dif.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "excel_dif.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "gceout.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "genhist.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "msolve_plt.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "ms51_plt.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "opti.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "osmass.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "osforce.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "osloads_force.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "pammass.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "pammass_2g.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "shock.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "tab.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "hx_out.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "hx_exp.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "marc_t19.tpl" })
+     *RegisterImportTemplate({ import_templates_dir + "ansys_mass.tpl" })
+
+     *RegisterExternalReader({ external_readers_dir + "/hgspd.exe"},"System Performance Data (*.spd)", "*.spd", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_sbtout.exe"})
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_sleout.exe"}) 
+     *RegisterExternalReader({ external_readers_dir + "/hglst.exe"}, "Helioss (*.lst)", "*.lst", ascii)     
+      RegisterExternalReader({ external_readers_dir + "/hgmat.exe"}, "Matlab (*.mat)", "*.mat" , binary)
+     *RegisterExternalReader({ external_readers_dir + "/hgosfreq.exe"}, "Optistruct (*.out)", "*.out" , ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgadrtracklab.exe"})
+     *RegisterExternalReader({ external_readers_dir + "/hgfchart.exe"})
+      RegisterExternalReader({ external_readers_dir + "/hgnastran_pch.exe"}, "NASTRAN PUNCH (*.PCH)", "*.pch", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgiso6487.exe"}, "ISO 6487 (*.ISO)", "*.iso", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgares.exe"}, "Adams Result (*.RES)", "*.RES", generic)
+     *RegisterExternalReader({ external_readers_dir + "/hgmrf.exe"}, "MotionSolve Result File (*.mrf)", "*.mrf" , binary)
+     *RegisterExternalReader({ external_readers_dir + "/hgdacreader.exe"}, "", "", binary)
+     *RegisterExternalReader({ external_readers_dir + "/hgrpc3reader.exe"}, "", "", binary)
+     *RegisterExternalReader({ external_readers_dir + "/hgfbd.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgmadymo.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_nodfor.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdaisy.exe"}, "PAM-CRASH DSY (*DSY)", "*.DSY", binary)
+     *RegisterExternalReader({ external_readers_dir + "/hgthp++.exe"}, "PAM-CRASH THP (*THP)", "*.THP", generic)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_rbdout.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_spcforc.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_glstat.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_trhist.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_dbfsi.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_sphout.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_ncforc.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_swforc.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_bndout.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_abstat.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgtiemOrbit.exe"}, "TiemOrbit", "*.bus *.bum *.reb *.spr *.dmp", ascii)     
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_deforc.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgnastf06.exe"}, "NASTRAN f06 (*.f06),NASTRAN PCH (*.PCH),NASTRAN OP2 (*.OP2)", "*f06*,*.pch,*.op2", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgnastran_pch_combined.exe"}, "NASTRAN PUNCH (*.PCH)", "*.pch", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hghdf.exe"}, "HDF4 (*.HDF)", "*.HDF*", binary)
+     *RegisterExternalReader({ external_readers_dir + "/hgdiadem.exe"}, "DIAdem (*.DAT),DIAdem TDM (*.TDM)", "*.DAT,*.TDM", generic)
+     *RegisterExternalReader({ external_readers_dir + "/hgopt.exe"}, "HGDATA (*.hgdata)", "*.hgdata", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgradioss++.exe"}, "RADIOSS (*T01),RADIOSS THY (*.thy)", "*T01,*.thy", generic)
+	 *RegisterExternalReader({ external_readers_dir + "/hgDatxCatxReader.exe"}, "", "", generic)
+     
+     *RegisterExternalReader({ external_readers_dir + "/hgunv.exe"}, "Universal Block 58 (*.UNV)", "*.UNV", ascii)
+     {if(hwdesktop==1)}
+     *RegisterExternalReader({ external_readers_dir + "/spline.exe"}, "Adams Input Data (*.ADM)", "*.ADM" , ascii)
+     {endif}
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_rcforc.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_jntforc.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/dads_graph.exe"}, "DADS Graph (*.BIN)", "*.BIN", binary)
+     *RegisterExternalReader({ external_readers_dir + "/hgadams.exe"}, "Adams Data (*.REQ),MotionSolve Plot File (*.plt)", "*.REQ,*.plt", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgadams_xmlres.exe"}, "Adams XML Result (*.RES),Universal Output File (*.XRF)", "*.RES,*.XRF", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgiso13499.exe"}, "ISO-MME 13499 (*.MME),ISO 13499 (*.ISO)", "*.MME,*.ISO", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_rwforc.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_secforc.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_binout.exe"}, "Dyna BINOUT (*BINOUT*)", "*BINOUT*", binary)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_nodout.exe"}, "", "", ascii)
+	 *RegisterExternalReader({ external_readers_dir + "/hgdyna_elout++.exe"}, "", "", ascii)
+	 *RegisterExternalReader({ external_readers_dir + "/hgdyna_elout.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_matsum.exe"}, "", "", ascii)
+     *RegisterExternalReader({ external_readers_dir + "/hgdynamass.exe"}, "", "", ascii) 
+     *RegisterExternalReader({ external_readers_dir + "/hgdyna_cpmsensor.exe"}, "", "", ascii)         
+     
+     *RegisterExportDLL("CSV Blocks", { external_writers_dir + "/hgblockwriter"}, "csv" )
+     *RegisterExportDLL("DAC", { external_writers_dir + "/hgdacwriter"}, "dac" )
+     *RegisterExportDLL("RPC", { external_writers_dir + "/hgrpcwriter"}, "rsp")
+	 *RegisterExportDLL("ISO MME", { external_writers_dir + "/hgmmewriter"}, "mme")
+     {include getenv("ALTAIR_HOME") + "/hw/prefinc/preferences_common_plot_functions.mvw"}
+
+{ preferences_common_plot_included = "true" }
+{ endif }
