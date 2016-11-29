@@ -28,6 +28,10 @@
             <string>#string</string>
           </dict>
           <dict>
+            <key>include</key>
+            <string>#const</string>
+          </dict>
+          <dict>
             <key>begin</key>
             <string>\(</string>
             <key>end</key>
@@ -113,6 +117,13 @@
         <string>"</string>
         <key>name</key>
         <string>string.quoted.double.mvw</string>
+      </dict>
+      <key>const</key>
+      <dict>
+        <key>match</key>
+        <string>\d+\.?\d+</string>
+        <key>name</key>
+        <string>constant.numeric.mvw</string>
       </dict>
     </dict>
     <key>scopeName</key>
