@@ -14,28 +14,34 @@
     <array>
       <dict>
         <key>include</key>
-        <string>#keyword</string>
-      </dict>
-      <dict>
-        <key>include</key>
         <string>#comment</string>
       </dict>
       <dict>
-        <key>include</key>
-        <string>#disabled-statement</string>
-      </dict>
-      <dict>
-        <key>include</key>
-        <string>#string</string>
-      </dict>
-    </array>
-    <key>repository</key>
-    <dict>
-      <key>keyword</key>
-      <dict>
-        <key>match</key>
-        <string>(\*)(\w+)(\().*(\))</string>
-        <key>captures</key>
+        <key>begin</key>
+        <string>(\*)(\w+)(\()</string>
+        <key>end</key>
+        <string>(\))</string>
+        <key>patterns</key>
+        <array>
+          <dict>
+            <key>include</key>
+            <string>#string</string>
+          </dict>
+          <dict>
+            <key>begin</key>
+            <string>\(</string>
+            <key>end</key>
+            <string>\)</string>
+            <key>patterns</key>
+            <array>
+              <dict>
+                <key>include</key>
+                <string>#string</string>
+              </dict>
+            </array>
+          </dict>
+        </array>
+        <key>beginCaptures</key>
         <dict>
           <key>1</key>
           <dict>
@@ -52,26 +58,33 @@
             <key>name</key>
             <string>variable.language.mvw</string>
           </dict>
-          <key>4</key>
+        </dict>
+        <key>endCaptures</key>
+        <dict>
+          <key>1</key>
           <dict>
             <key>name</key>
             <string>variable.language.mvw</string>
           </dict>
         </dict>
       </dict>
+      <dict>
+        <key>begin</key>
+        <string>^\s*\w+\(</string>
+        <key>end</key>
+        <string>(\))</string>
+        <key>name</key>
+        <string>comment.line.disabled.mvw</string>
+      </dict>
+    </array>
+    <key>repository</key>
+    <dict>
       <key>comment</key>
       <dict>
         <key>match</key>
         <string>(\/\/.*)</string>
         <key>name</key>
         <string>comment.line.mvw</string>
-      </dict>
-      <key>disabled-statement</key>
-      <dict>
-        <key>match</key>
-        <string>^\s*\w+\(.*\)</string>
-        <key>name</key>
-        <string>comment.line.disabled.mvw</string>
       </dict>
       <key>string</key>
       <dict>
