@@ -121,7 +121,7 @@
       <key>const</key>
       <dict>
         <key>match</key>
-        <string>\d+\.?\d+</string>
+        <string>\d+\.?\d*</string>
         <key>name</key>
         <string>constant.numeric.mvw</string>
       </dict>
